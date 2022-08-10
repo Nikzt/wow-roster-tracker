@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { WoWClass } from "../../common/classes";
+import { WoWClass, WoWClassOptions } from "../../common/classes";
 import "./roster.css";
 
 type Player = {
@@ -9,6 +9,7 @@ type Player = {
 
 const Roster = () => {
   const [players, setPlayers] = useState<Player[]>([]);
+  const classOptions = Object.values(WoWClassOptions);
 
   const onAddPlayerClick = () => {
     const inputButton = document.querySelector(".add-player-button") as HTMLInputElement;
@@ -26,6 +27,12 @@ const Roster = () => {
 
   return (
     <div className="roster">
+      <ul>
+        {classOptions.map(c => <li key={c.name} style={{backgroundColor: c.color}}>
+          <img src={c.icon}/>
+          {c.name}
+        </li>)}
+      </ul>
       <ul>
         {players.map(p => <li key={p.name}>{p.name}</li>)}
       </ul>

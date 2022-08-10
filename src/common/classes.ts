@@ -1,6 +1,7 @@
 export type WoWClass = {
   name: string;
   color: string;
+  icon: string;
   specs: {[key: string]: WoWSpec}
 };
 
@@ -20,6 +21,7 @@ export const WoWClassOptions: { [key: string]: WoWClass } = {
   warrior: {
     name: "Warrior",
     color: "#C69B6D",
+    icon: new URL("../assets/icons/warrior.webp", import.meta.url).href,
     specs: {
       fury: {
         name: "Fury",
@@ -31,6 +33,7 @@ export const WoWClassOptions: { [key: string]: WoWClass } = {
   warlock: {
     name: "Warlock",
     color: "#8788EE",
+    icon: new URL("../assets/icons/warlock.webp", import.meta.url).href,
     specs: {
       destruction: {
         name: "Destruction",
@@ -42,6 +45,7 @@ export const WoWClassOptions: { [key: string]: WoWClass } = {
   shaman: {
     name: "Shaman",
     color: "#0070DD",
+    icon: new URL("../assets/icons/shaman.webp", import.meta.url).href,
     specs: {
       enhancement: {
         name: "Enhancement",
@@ -53,6 +57,7 @@ export const WoWClassOptions: { [key: string]: WoWClass } = {
   rogue: {
     name: "Rogue",
     color: "#FFF468",
+    icon: new URL("../assets/icons/rogue.webp", import.meta.url).href,
     specs: {
       subtlety: {
         name: "Subtlety",
@@ -74,6 +79,7 @@ export const WoWClassOptions: { [key: string]: WoWClass } = {
   priest: {
     name: "Priest",
     color: "#FFFFFF",
+    icon: new URL("../assets/icons/priest.webp", import.meta.url).href,
     specs: {
       holy: {
         name: "Holy",
@@ -95,6 +101,7 @@ export const WoWClassOptions: { [key: string]: WoWClass } = {
   paladin: {
     name: "Paladin",
     color: "#F48CBA",
+    icon: new URL("../assets/icons/paladin.webp", import.meta.url).href,
     specs: {
       protection: {
         name: "Protection",
@@ -116,6 +123,7 @@ export const WoWClassOptions: { [key: string]: WoWClass } = {
   mage: {
     name: "Mage",
     color: "#3FC7EB",
+    icon: new URL("../assets/icons/mage.webp", import.meta.url).href,
     specs: {
       frost: {
         name: "Frost",
@@ -137,6 +145,7 @@ export const WoWClassOptions: { [key: string]: WoWClass } = {
   hunter: {
     name: "Hunter",
     color: "#AAD372",
+    icon: new URL("../assets/icons/hunter.webp", import.meta.url).href,
     specs: {
       beastMastery: {
         name: "Beast Mastery",
@@ -158,6 +167,7 @@ export const WoWClassOptions: { [key: string]: WoWClass } = {
   druid: {
     name: "Druid",
     color: "#FF7C0A",
+    icon: new URL("../assets/icons/druid.webp", import.meta.url).href,
     specs: {
       feralTank: {
         name: "Feral (Tank)",
@@ -184,6 +194,7 @@ export const WoWClassOptions: { [key: string]: WoWClass } = {
   deathKnight: {
     name: "Death Knight",
     color: "#C41E3A",
+    icon: new URL("../assets/icons/death-knight.webp", import.meta.url).href,
     specs: {
       blood: {
         name: "Blood",
