@@ -343,7 +343,7 @@ const WoWClassOptions: { [key: number]: WoWClass } = {
     name: "Druid",
     color: "#FF7C0A",
     icon: new URL("../assets/icons/druid.webp", import.meta.url).href,
-    specs: new Set([WoWSpecEnum.druidFeral, WoWSpecEnum.druidBalance, WoWSpecEnum.druidFeralTank, WoWSpecEnum.druidFeralDPS]),
+    specs: new Set([WoWSpecEnum.druidRestoration, WoWSpecEnum.druidBalance, WoWSpecEnum.druidFeralTank, WoWSpecEnum.druidFeralDPS]),
   },
   [WoWClassEnum.deathKnight]: {
     name: "Death Knight",
