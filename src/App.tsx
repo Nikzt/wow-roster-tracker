@@ -4,8 +4,8 @@ import Roster from "./components/Roster/Roster";
 function App() {
   return (
     <>
-      <header>
-        <h1>WoW Roster Tracker</h1>
+      <header className="app-header">
+        <h1 className="app-header__title">WoW Roster Tracker</h1>
       </header>
       <main>
         <Roster />

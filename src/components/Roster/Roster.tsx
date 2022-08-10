@@ -1,15 +1,57 @@
 import { useState } from "react";
-import { WoWClass, WoWClassOptions } from "../../common/classes";
+import { Player, WoWClassEnum, WoWSpecEnum } from "../../common/classes";
+import PlayerListItem from "../PlayerListItem/PlayerListItem";
 import "./roster.css";
 
-type Player = {
-  name: string;
-  characters: WoWClass[];
-}
+const testPlayers: Player[] = [
+  {
+    name: "Bence",
+    characters: [
+      {
+        name: "Zalgo",
+        class: WoWClassEnum.warrior,
+        mainSpec: WoWSpecEnum.warriorFury
+      }
+    ],
+    mainCharacterName: "Zalgo",
+  },
+  {
+    name: "Bram",
+    characters: [
+      {
+        name: "Tygerz",
+        class: WoWClassEnum.druid,
+        mainSpec: WoWSpecEnum.druidFeralTank
+      }
+    ],
+    mainCharacterName: "Tygerz"
+  },
+  {
+    name: "Dan",
+    characters: [
+      {
+        name: "Rarewaffles",
+        class: WoWClassEnum.shaman,
+        mainSpec: WoWSpecEnum.shamanRestoration
+      }
+    ],
+    mainCharacterName: "Rarewaffles"
+  },
+  {
+    name: "Butthead",
+    characters: [
+      {
+        name: "Butthead",
+        class: WoWClassEnum.rogue,
+        mainSpec: WoWSpecEnum.rogueAssassination
+      }
+    ],
+    mainCharacterName: "Butthead",
+  },
+]
 
 const Roster = () => {
-  const [players, setPlayers] = useState<Player[]>([]);
-  const classOptions = Object.values(WoWClassOptions);
+  const [players, setPlayers] = useState<Player[]>(testPlayers);
 
   const onAddPlayerClick = () => {
     const inputButton = document.querySelector(".add-player-button") as HTMLInputElement;
@@ -17,7 +59,8 @@ const Roster = () => {
 
     const newPlayer: Player = {
       name: inputButton.value,
-      characters: []
+      characters: [],
+      mainCharacterName: "",
     }
 
     const nextPlayersState = [...players, newPlayer];
@@ -27,17 +70,11 @@ const Roster = () => {
 
   return (
     <div className="roster">
-      <ul>
-        {classOptions.map(c => <li key={c.name} style={{backgroundColor: c.color}}>
-          <img src={c.icon}/>
-          {c.name}
-        </li>)}
-      </ul>
-      <ul>
-        {players.map(p => <li key={p.name}>{p.name}</li>)}
-      </ul>
-      <input className="add-player-button" type="text"/>
-      <button onClick={onAddPlayerClick}>Add Player</button>
+      <div className="roster__player-list">
+        {players.map(p => <PlayerListItem player={p} key={p.name} />)}
+      </div>
+      {/* <input className="add-player-button" type="text"/> */}
+      {/* <button onClick={onAddPlayerClick}>Add Player</button> */}
     </div>
   );
 };
