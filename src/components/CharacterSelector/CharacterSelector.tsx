@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getWoWClassById, getWoWClassOptionsList, WoWClassEnum } from "../../common/classes";
+import { getWoWClassById, getWoWClassOptionsList, WoWCharacter, WoWClassEnum, WoWSpecEnum } from "../../common/classes";
 import "./characterSelector.css";
 
 type Character = {
@@ -9,26 +9,43 @@ type Character = {
   classId: WoWClassEnum;
 }
 
-const CharacterSelector = () => {
+type CharacterSelectorProps = {
+  onChange: (characters: WoWCharacter[]) => void
+}
+
+const CharacterSelector = ({onChange}: CharacterSelectorProps) => {
   const classOptions = getWoWClassOptionsList();
 
   const [characters, setCharacters] = useState<Character[]>([]);
+
+  const updateCharacters = (characters: Character[]) => {
+    const wowCharacters: WoWCharacter[] = characters.map(c => {return {
+      class: c.classId,
+      name: c.name,
+      mainSpec: WoWSpecEnum.unknown,
+      offSpec: WoWSpecEnum.unknown,
+    }})
+    onChange(wowCharacters.filter(c => c.name?.length > 2 && c.class != WoWClassEnum.unknown && c.class != null));
+    setCharacters(characters);
+  }
 
   const onClassSelectButtonClick = (id: number) => {
     const characterIdx = characters.findIndex(c => c.id === id);
     if (characterIdx < 0) return;
     const nextCharacters = [...characters];
     nextCharacters[characterIdx].showOptions = !nextCharacters[characterIdx].showOptions;
-    setCharacters(nextCharacters);
+
+    updateCharacters(nextCharacters);
   }
 
   const onAddCharacterButtonClick = () => {
-    setCharacters([...characters, {
+  const nextCharacters = [...characters, {
       showOptions: false,
       id: characters.reduce((a, b) => a > b.id ? a : b.id, 0) + 1,
       name: "",
       classId: WoWClassEnum.unknown
-    }])
+    }]
+    updateCharacters(nextCharacters);
   }
 
   const onSelectClass = (charId: number, classId: WoWClassEnum) => {
@@ -37,7 +54,15 @@ const CharacterSelector = () => {
     const nextCharacters = [...characters];
     nextCharacters[characterIdx].classId = classId;
     nextCharacters[characterIdx].showOptions = false;
-    setCharacters(nextCharacters);
+    updateCharacters(nextCharacters);
+  }
+
+  const onChangeCharacterName = (e: React.FocusEvent<HTMLInputElement, Element>, charId: number) => {
+    const characterIdx = characters.findIndex(c => c.id === charId);
+    if (characterIdx < 0) return;
+    const nextCharacters = [...characters];
+    nextCharacters[characterIdx].name = e.target.value;
+    updateCharacters(nextCharacters);
   }
 
   const isUnselectedClass = (classId: WoWClassEnum) => classId === WoWClassEnum.unknown;
@@ -47,7 +72,7 @@ const CharacterSelector = () => {
     {characters.map(c => <div className={`character-selector ${c.showOptions ? "options-visible": ""}`}>
 
       <div className="character-selector__selection">
-        <input type="text"/>
+        <input type="text" onBlur={(e) => onChangeCharacterName(e, c.id)}/>
         <button className="class-select-button character-selector__selection-value"
                 onClick={() => onClassSelectButtonClick(c.id)}
                 >

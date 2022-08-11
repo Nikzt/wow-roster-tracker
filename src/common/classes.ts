@@ -44,7 +44,7 @@ export enum WoWSpecEnum {
   deathKnightFrost,
   deathKnightBlood,
   deathKnightUnholy,
-  unkown,
+  unknown,
 }
 
 export enum RolesEnum {
@@ -84,9 +84,16 @@ export type WoWCharacter = {
 }
 
 export type Player = {
-  name: string;
+  id: string;
+  info: PlayerInfo;
   characters: WoWCharacter[];
   mainCharacterName: string;
+}
+
+export type PlayerInfo = {
+  name: string;
+  discord?: string;
+  battleNet?: string;
 }
 
 export const getWoWClassDetails = (classEnum: WoWClassEnum) => {

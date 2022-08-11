@@ -34,7 +34,7 @@ const PlayerListItem = ({player}: PlayerProps) => {
 
   return <div className="player">
     <img className="player__role-icon role-icon" src={mainCharacterRole?.icon} />
-    <p className="player__name">{player.name}</p>
+    <p className="player__name">{player.info.name}</p>
     <p className="player__main-character" style={{color: mainCharacterClass?.color}}>{mainCharacter?.name}</p>
     <img className="class-icon" src={mainCharacterClass?.icon}/>
   </div>

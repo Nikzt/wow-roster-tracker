@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import { Player } from "./common/classes";
 import EditPlayerModal from "./components/EditPlayerModal/EditPlayerModal";
 import Roster from "./components/Roster/Roster";
 
@@ -14,6 +15,8 @@ function App() {
     isEditing: false,
   })
 
+  const [rosterState, setRosterState] = useState<Player[]>([]);
+
   const onAddPlayerButtonClick = () => {
     setModalState({...modalState, showModal: true})
   }
@@ -22,8 +25,9 @@ function App() {
     setModalState({...modalState, showModal: false})
   }
 
-  const onConfirmUpdateClick = () => {
+  const onConfirmUpdateClick = (player: Player) => {
     setModalState({...modalState, showModal: false})
+    setRosterState([...rosterState, player]);
   }
 
   return (
@@ -32,7 +36,7 @@ function App() {
         <h1 className="app-header__title">WoW Roster Tracker</h1>
       </header>
       <main>
-        <Roster onAddPlayerButtonClick={onAddPlayerButtonClick}/>
+        <Roster onAddPlayerButtonClick={onAddPlayerButtonClick} players={rosterState}/>
       </main>
       <EditPlayerModal showModal={modalState.showModal} onUpdatePlayerClick={onConfirmUpdateClick} onCancelClick={onCancelEditClick} isEditing={modalState.isEditing}/>
     </>
