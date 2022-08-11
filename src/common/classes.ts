@@ -67,6 +67,7 @@ export type WoWSpec = {
 export type WoWRole = {
   name: string;
   icon: string;
+  color: string;
 }
 
 export type WoWCharacter = {
@@ -97,19 +98,25 @@ export const getWoWRoleDetails = (roleEnum: RolesEnum) => {
   return WoWRoleOptions[roleEnum];
 }
 
+export const getWoWClassOptionsList = () => {
+  return Object.values(WoWClassOptions);
+}
 
 const WoWRoleOptions: {[key: number]: WoWRole} = {
   [RolesEnum.DPS]: {
     name: "DPS",
     icon: new URL("../assets/icons/dps.svg", import.meta.url).href,
+    color: "#c74850",
   },
   [RolesEnum.Healer]: {
     name: "Healer",
     icon: new URL("../assets/icons/healer.svg", import.meta.url).href,
+    color: "#adf7b3",
   },
   [RolesEnum.Tank]: {
     name: "Tank",
     icon: new URL("../assets/icons/tank.svg", import.meta.url).href,
+    color: "#80b7e0",
   },
 }
 

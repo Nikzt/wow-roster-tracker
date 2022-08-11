@@ -26,6 +26,12 @@ const PlayerListItem = ({player}: PlayerProps) => {
     return getWoWRoleDetails(mainCharacterSpec.role);
   }, [mainCharacterSpec]);
 
+  const getBorderGradient = () => {
+    const beginColor = mainCharacterRole?.color;
+    const endColor = mainCharacterClass?.color;
+    return `linear-gradient(90deg, ${beginColor} 0%, ${beginColor} 40%, ${endColor} 60%, ${endColor} 100% )`
+  }
+
   return <div className="player">
     <img className="player__role-icon role-icon" src={mainCharacterRole?.icon} />
     <p className="player__name">{player.name}</p>

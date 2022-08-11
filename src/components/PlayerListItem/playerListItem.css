@@ -1,9 +1,10 @@
 .player {
+  position: relative;
   display: grid;
   grid-template-columns: 30px 100px 100px auto;
   align-items: center;
-  background-color: rgba(11, 114, 133, 0.1);
-  border: 1px solid rgba(11, 114, 133, 0.35);
+  background-color: #131a29;
+  border: 1px solid #153747;
   padding: 10px;
   border-radius: 8px;
   height: 50px;

@@ -1,0 +1,37 @@
+.class-select-button {
+  border: none;
+  display: grid;
+  grid-template-columns: 30px 100px;
+  color: #eeeeff;
+  align-items: center;
+  align-content: center;
+  width: 170px;
+  background-color: rgb(29, 33, 58);
+  font-weight: 200;
+  border-radius: 5px;
+  text-align: left;
+  column-gap: 20px;
+  height: auto;
+  padding: 5px;
+}
+
+.class-select-button:hover {
+  box-shadow: none;
+}
+
+.class-select-button .class-icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 1px;
+}
+
+.character-selector__class-options {
+  background-color: black;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 5px;
+  background-color: rgb(29, 33, 58);
+}
