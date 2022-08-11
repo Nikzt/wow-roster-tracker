@@ -15,6 +15,7 @@ const EditPlayerModal = ({showModal, isEditing, onCancelClick, onUpdatePlayerCli
     </div>
     <div className="modal-container">
       <div className="edit-player-modal">
+        <h3 className="edit-player-modal__section-header">Player Info</h3>
         <form className="edit-player-modal__player-info">
           <label>Name</label>
           <input type="text" spellCheck="false"/>
@@ -23,9 +24,12 @@ const EditPlayerModal = ({showModal, isEditing, onCancelClick, onUpdatePlayerCli
           <label>Battle.net</label>
           <input type="text" spellCheck="false"/>
         </form>
+        <h3 className="edit-player-modal__section-header">Characters</h3>
         <CharacterSelector />
-        <button onClick={onUpdatePlayerClick}>{isEditing ? "Update" : "Add Player"}</button>
-        <button onClick={onCancelClick}>Cancel</button>
+        <footer className="modal-footer">
+          <button onClick={onCancelClick}>Cancel</button>
+          <button onClick={onUpdatePlayerClick} className="default-button">{isEditing ? "Update" : "Add Player"}</button>
+        </footer>
       </div>
     </div>
   </>

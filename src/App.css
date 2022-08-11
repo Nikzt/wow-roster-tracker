@@ -16,6 +16,7 @@ ul {
 
 .app-header {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .app-header__title {
@@ -25,18 +26,49 @@ ul {
 
 button {
   font-family: "Titillium Web", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background: transparent;
-  border: 1px solid rgb(150, 230, 255);
-  color: rgb(150, 230, 255);
   border-radius: 3px;
-  height: 40px;
   width: 100px;
+  height: 42px;
+  width: auto;
+  padding: 0 22px; 
   cursor: pointer;
+  font-weight: 600;
+  line-height: 1;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  color: #ccccdd;
+  border: 1px solid #ccccdd;
+}
+
+button.default-button {
+  border: 1px solid transparent;
+  box-shadow: rgba(25, 113, 194, 0.36) 0 4px 14px 0;
+  background-color: #1971c2;
+  background-image: #1971c2;
+  color: #fff;
 }
 
 button:hover {
-  background-color: rgba(40, 60, 80, 0.4);
-  box-shadow: 0px 0px 7px rgba(50, 60, 100);
+}
+
+button.add-button {
+  width: 30px;
+  padding: 5px;
+  height: 30px;
+  border: none;
+  background: transparent;
+}
+
+button.add-button > img {
+  width: 20px;
+  height: 20px;
+  margin-left: -1px;
+  margin-top: -1px;
+  filter: invert(48%) sepia(79%) saturate(200%) hue-rotate(180deg) brightness(100%) contrast(119%);
 }
 
 input[type=text] {
@@ -47,9 +79,27 @@ input[type=text] {
   background-color: rgb(29, 33, 58);
   color: #eeeeff;
   padding-left: 10px;
+
 }
 
 input:focus {
   outline: none;
   background-color: rgb(40, 45, 68);
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.desaturate {
+  filter: grayscale(100%);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: right;
+}
+
+.modal-footer > * {
+  margin-left: 15px;
 }

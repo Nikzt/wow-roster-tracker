@@ -37,6 +37,7 @@
   display: grid;
   align-items: center;
   grid-template-rows: repeat(30px 40px);
+  margin-bottom: 20px;
 }
 
 .edit-player-modal__player-info > label {
@@ -49,4 +50,8 @@
 
 .edit-player-modal__player-info > input {
   margin-bottom: 15px;
+}
+
+.edit-player-modal__section-header {
+  margin-bottom: 20px;
 }

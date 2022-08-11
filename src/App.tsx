@@ -32,8 +32,7 @@ function App() {
         <h1 className="app-header__title">WoW Roster Tracker</h1>
       </header>
       <main>
-        <button className="add-player-button" onClick={onAddPlayerButtonClick}>+</button>
-        <Roster />
+        <Roster onAddPlayerButtonClick={onAddPlayerButtonClick}/>
       </main>
       <EditPlayerModal showModal={modalState.showModal} onUpdatePlayerClick={onConfirmUpdateClick} onCancelClick={onCancelEditClick} isEditing={modalState.isEditing}/>
     </>

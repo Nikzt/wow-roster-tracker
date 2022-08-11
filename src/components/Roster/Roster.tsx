@@ -50,31 +50,19 @@ const testPlayers: Player[] = [
   },
 ]
 
-const Roster = () => {
+type RosterProps = {
+  onAddPlayerButtonClick: () => void;
+}
+
+const Roster = ({onAddPlayerButtonClick}: RosterProps) => {
   const [players, setPlayers] = useState<Player[]>(testPlayers);
-
-  const onAddPlayerClick = () => {
-    const inputButton = document.querySelector(".add-player-button") as HTMLInputElement;
-    if (!inputButton || !inputButton.value || !(inputButton.value.trim())) return;
-
-    const newPlayer: Player = {
-      name: inputButton.value,
-      characters: [],
-      mainCharacterName: "",
-    }
-
-    const nextPlayersState = [...players, newPlayer];
-    setPlayers(nextPlayersState);
-    inputButton.value = "";
-  }
 
   return (
     <div className="roster">
+      <button className="add-player-button default-button" onClick={onAddPlayerButtonClick}>Add Player</button>
       <div className="roster__player-list">
         {players.map(p => <PlayerListItem player={p} key={p.name} />)}
       </div>
-      {/* <input className="add-player-button" type="text"/> */}
-      {/* <button onClick={onAddPlayerClick}>Add Player</button> */}
     </div>
   );
 };

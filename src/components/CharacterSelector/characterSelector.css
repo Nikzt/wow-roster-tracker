@@ -5,7 +5,7 @@
   color: #eeeeff;
   align-items: center;
   align-content: center;
-  width: 170px;
+  width: 155px;
   background-color: rgb(29, 33, 58);
   font-weight: 200;
   border-radius: 5px;
@@ -13,10 +13,12 @@
   column-gap: 20px;
   height: auto;
   padding: 5px;
+  background-color: #11111f;
 }
 
 .class-select-button:hover {
   box-shadow: none;
+  background-color: #141832;
 }
 
 .class-select-button .class-icon {
@@ -28,10 +30,30 @@
 .character-selector__class-options {
   background-color: black;
   position: absolute;
-  display: flex;
-  flex-direction: column;
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   border-radius: 4px;
   overflow: hidden;
   padding: 5px;
   background-color: rgb(29, 33, 58);
+  gap: 5px;
+  z-index: 40;
+}
+
+ .options-visible .character-selector__selection-value {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.character-selector-section .add-button {
+  margin-bottom: 30px;
+  margin-top: 5px;
+}
+
+.character-selector__selection {
+  display: grid;
+  align-items: center;
+  column-gap: 20px;
+  grid-template-columns: 150px auto;
 }
