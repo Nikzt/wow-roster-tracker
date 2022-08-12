@@ -67,6 +67,7 @@ export type WoWSpec = {
   role: RolesEnum;
   melee: boolean;
   id: WoWSpecEnum;
+  icon: string;
 };
 
 export type WoWRole = {
@@ -121,6 +122,12 @@ export const getWoWClassById = (id: WoWClassEnum) => {
   return WoWClassOptions[id];
 }
 
+export const getWoWSpecsByClassId = (classId: WoWClassEnum) => {
+  const wowClass = getWoWClassDetails(classId);
+  if (!wowClass) return;
+  return Array.from(wowClass.specs).map(specId => getWoWSpecDetails(specId));
+}
+
 const WoWRoleOptions: {[key: number]: WoWRole} = {
   [RolesEnum.DPS]: {
     name: "DPS",
@@ -149,30 +156,35 @@ const WoWSpecOptions: {[key: number]: WoWSpec} = {
     role: RolesEnum.DPS,
     melee: true,
     id: WoWSpecEnum.warriorArms,
+    icon: new URL("../assets/icons/warrior-arms.webp", import.meta.url).href,
   },
   [WoWSpecEnum.warriorFury]: {
     name: "Fury",
     role: RolesEnum.DPS,
     melee: true,
     id: WoWSpecEnum.warriorFury,
+    icon: new URL("../assets/icons/warrior-fury.webp", import.meta.url).href,
   },
   [WoWSpecEnum.warriorProtection]: {
     name: "Protection",
     role: RolesEnum.Tank,
     melee: true,
     id: WoWSpecEnum.warriorProtection,
+    icon: new URL("../assets/icons/warrior-protection.webp", import.meta.url).href,
   },
 
   // Warlock
   [WoWSpecEnum.warlockDestruction]: {
     name: "Destruction",
     role: RolesEnum.DPS,
+    icon: new URL("../assets/icons/warlock-destruction.webp", import.meta.url).href,
     melee: false,
     id: WoWSpecEnum.warlockDestruction,
   },
   [WoWSpecEnum.warlockDemonology]: {
     name: "Demonology",
     role: RolesEnum.DPS,
+    icon: new URL("../assets/icons/warlock-demonology.webp", import.meta.url).href,
     melee: false,
     id: WoWSpecEnum.warlockDemonology,
   },
@@ -181,6 +193,7 @@ const WoWSpecOptions: {[key: number]: WoWSpec} = {
     role: RolesEnum.DPS,
     melee: false,
     id: WoWSpecEnum.warlockAffliction,
+    icon: new URL("../assets/icons/warlock-affliction.webp", import.meta.url).href,
   },
 
   // Druid
@@ -189,24 +202,28 @@ const WoWSpecOptions: {[key: number]: WoWSpec} = {
     role: RolesEnum.Tank,
     melee: true,
     id: WoWSpecEnum.druidFeralTank,
+    icon: new URL("../assets/icons/druid-feral.webp", import.meta.url).href,
   },
   [WoWSpecEnum.druidFeralDPS]: {
     name: "Feral (Cat)",
     role: RolesEnum.DPS,
     melee: true,
     id: WoWSpecEnum.druidFeralDPS,
+    icon: new URL("../assets/icons/druid-feral.webp", import.meta.url).href,
   },
   [WoWSpecEnum.druidBalance]: {
     name: "Balance",
     role: RolesEnum.DPS,
     melee: false,
     id: WoWSpecEnum.druidBalance,
+    icon: new URL("../assets/icons/druid-balance.webp", import.meta.url).href,
   },
   [WoWSpecEnum.druidRestoration]: {
     name: "Restoration",
     role: RolesEnum.Healer,
     melee: false,
     id: WoWSpecEnum.druidRestoration,
+    icon: new URL("../assets/icons/druid-restoration.webp", import.meta.url).href,
   },
 
   // Mage
@@ -215,18 +232,21 @@ const WoWSpecOptions: {[key: number]: WoWSpec} = {
     role: RolesEnum.DPS,
     melee: false,
     id: WoWSpecEnum.mageFrost,
+    icon: new URL("../assets/icons/mage-frost.webp", import.meta.url).href,
   },
   [WoWSpecEnum.mageFire]: {
     name: "Fire",
     role: RolesEnum.DPS,
     melee: false,
     id: WoWSpecEnum.mageFire,
+    icon: new URL("../assets/icons/mage-fire.webp", import.meta.url).href,
   },
   [WoWSpecEnum.mageArcane]: {
     name: "Arcane",
     role: RolesEnum.DPS,
     melee: false,
     id: WoWSpecEnum.mageArcane,
+    icon: new URL("../assets/icons/mage-arcane.webp", import.meta.url).href,
   },
 
   // Shaman
@@ -235,18 +255,21 @@ const WoWSpecOptions: {[key: number]: WoWSpec} = {
     role: RolesEnum.Healer,
     melee: false,
     id: WoWSpecEnum.shamanRestoration,
+    icon: new URL("../assets/icons/shaman-restoration.webp", import.meta.url).href,
   },
   [WoWSpecEnum.shamanEnhancement]: {
     name: "Enhancement",
     role: RolesEnum.DPS,
     melee: true,
     id: WoWSpecEnum.shamanEnhancement,
+    icon: new URL("../assets/icons/shaman-enhancement.webp", import.meta.url).href,
   },
   [WoWSpecEnum.shamanElemental]: {
     name: "Elemental",
     role: RolesEnum.DPS,
     melee: false,
     id: WoWSpecEnum.shamanElemental,
+    icon: new URL("../assets/icons/shaman-elemental.webp", import.meta.url).href,
   },
 
   // Rogue
@@ -255,18 +278,21 @@ const WoWSpecOptions: {[key: number]: WoWSpec} = {
     role: RolesEnum.DPS,
     melee: true,
     id: WoWSpecEnum.rogueAssassination,
+    icon: new URL("../assets/icons/rogue-assassination.webp", import.meta.url).href,
   },
   [WoWSpecEnum.rogueCombat]: {
     name: "Combat",
     role: RolesEnum.DPS,
     melee: true,
     id: WoWSpecEnum.rogueCombat,
+    icon: new URL("../assets/icons/rogue-combat.webp", import.meta.url).href,
   },
   [WoWSpecEnum.rogueSubtlety]: {
     name: "Subtlety",
     role: RolesEnum.DPS,
     melee: true,
     id: WoWSpecEnum.rogueSubtlety,
+    icon: new URL("../assets/icons/rogue-subtlety.webp", import.meta.url).href,
   },
 
   // Priest
@@ -275,18 +301,21 @@ const WoWSpecOptions: {[key: number]: WoWSpec} = {
     role: RolesEnum.Healer,
     melee: false,
     id: WoWSpecEnum.priestHoly,
+    icon: new URL("../assets/icons/priest-holy.webp", import.meta.url).href,
   },
   [WoWSpecEnum.priestDiscipline]: {
     name: "Discipline",
     role: RolesEnum.Healer,
     melee: false,
     id: WoWSpecEnum.priestDiscipline,
+    icon: new URL("../assets/icons/priest-discipline.webp", import.meta.url).href,
   },
   [WoWSpecEnum.priestShadow]: {
     name: "Shadow",
     role: RolesEnum.DPS,
     melee: false,
     id: WoWSpecEnum.priestShadow,
+    icon: new URL("../assets/icons/priest-shadow.webp", import.meta.url).href,
   },
 
   // Paladin
@@ -295,18 +324,21 @@ const WoWSpecOptions: {[key: number]: WoWSpec} = {
     role: RolesEnum.Tank,
     melee: true,
     id: WoWSpecEnum.paladinProtection,
+    icon: new URL("../assets/icons/paladin-protection.webp", import.meta.url).href,
   },
   [WoWSpecEnum.paladinRetribution]: {
     name: "Retribution",
     role: RolesEnum.DPS,
     melee: true,
     id: WoWSpecEnum.paladinRetribution,
+    icon: new URL("../assets/icons/paladin-retribution.webp", import.meta.url).href,
   },
   [WoWSpecEnum.paladinHoly]: {
     name: "Holy",
     role: RolesEnum.Healer,
     melee: false,
     id: WoWSpecEnum.paladinHoly,
+    icon: new URL("../assets/icons/paladin-holy.webp", import.meta.url).href,
   },
 
   // Hunter
@@ -315,18 +347,21 @@ const WoWSpecOptions: {[key: number]: WoWSpec} = {
     role: RolesEnum.DPS,
     melee: false,
     id: WoWSpecEnum.hunterMarksmanship,
+    icon: new URL("../assets/icons/hunter-marksmanship.webp", import.meta.url).href,
   },
   [WoWSpecEnum.hunterBeastMastery]: {
     name: "Beast Mastery",
     role: RolesEnum.DPS,
     melee: false,
     id: WoWSpecEnum.hunterBeastMastery,
+    icon: new URL("../assets/icons/hunter-beast-mastery.webp", import.meta.url).href,
   },
   [WoWSpecEnum.hunterSurvival]: {
     name: "Survival",
     role: RolesEnum.DPS,
     melee: false,
     id: WoWSpecEnum.hunterSurvival,
+    icon: new URL("../assets/icons/hunter-survival.webp", import.meta.url).href,
   },
 
   // Death Knight
@@ -335,18 +370,21 @@ const WoWSpecOptions: {[key: number]: WoWSpec} = {
     role: RolesEnum.DPS,
     melee: true,
     id: WoWSpecEnum.deathKnightFrost,
+    icon: new URL("../assets/icons/death-knight-frost.webp", import.meta.url).href,
   },
   [WoWSpecEnum.deathKnightBlood]: {
     name: "Blood",
     role: RolesEnum.Tank,
     melee: true,
     id: WoWSpecEnum.deathKnightBlood,
+    icon: new URL("../assets/icons/death-knight-blood.webp", import.meta.url).href,
   },
   [WoWSpecEnum.deathKnightUnholy]: {
     name: "Unholy",
     role: RolesEnum.DPS,
     melee: true,
     id: WoWSpecEnum.deathKnightUnholy,
+    icon: new URL("../assets/icons/death-knight-unholy.webp", import.meta.url).href,
   },
 }
 

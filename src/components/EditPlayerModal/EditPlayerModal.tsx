@@ -55,11 +55,10 @@ const EditPlayerModal = ({showModal, isEditing, onCancelClick, onUpdatePlayerCli
           <label>Battle.net</label>
           <input onChange={(e) => updatePlayerInfo(e, "battleNet")} type="text" name="battleNet" spellCheck="false"/>
         </div>
-        <h3 className="edit-player-modal__section-header">Characters</h3>
         <CharacterSelector onChange={onUpdateCharacterSelections}/>
         <footer className="modal-footer">
           <button onClick={onCancelClick}>Cancel</button>
-          <button onClick={onSaveClick}  className="default-button">{isEditing ? "Update" : "Add Player"}</button>
+          <button onClick={onSaveClick} className="default-button">Save</button>
         </footer>
       </div>
     </div>

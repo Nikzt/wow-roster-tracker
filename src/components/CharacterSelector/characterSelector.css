@@ -39,6 +39,15 @@
   background-color: rgb(29, 33, 58);
   gap: 5px;
   z-index: 40;
+  height: 0px;
+  opacity: 0;
+  width: 0px;
+  transition: height 0.15s ease;
+}
+.character-selector__class-options.show {
+  opacity: 1;
+  height: 225px;
+  width: auto;
 }
 
  .options-visible .character-selector__selection-value {
@@ -46,14 +55,21 @@
   border-bottom-right-radius: 0px;
 }
 
-.character-selector-section .add-button {
-  margin-bottom: 30px;
-  margin-top: 5px;
-}
 
 .character-selector__selection {
   display: grid;
   align-items: center;
   column-gap: 20px;
-  grid-template-columns: 150px auto;
+  grid-template-columns: 110px auto;
+}
+
+.edit-player-modal__section-header.characters-header {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 80px auto;
+  margin-bottom: 10px;
+}
+
+.character-selector-section {
+  margin-bottom: 20px;
 }
