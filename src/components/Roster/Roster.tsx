@@ -1,26 +1,7 @@
-import { useState } from "react";
+import { getRoster } from "../../common/api";
 import { Player, WoWClassEnum, WoWSpecEnum } from "../../common/classes";
 import PlayerListItem from "../PlayerListItem/PlayerListItem";
 import "./roster.css";
-
-const testPlayers: Player[] = [
-  {
-    id: "Bence",
-    info: {
-      name: "Bence",
-      discord: "Nikzt",
-      battleNet: "Nikzt",
-    },
-    characters: [
-      {
-        name: "Zalgo",
-        class: WoWClassEnum.warrior,
-        mainSpec: WoWSpecEnum.warriorFury
-      }
-    ],
-    mainCharacterName: "Zalgo",
-  },
-]
 
 type RosterProps = {
   onAddPlayerButtonClick: () => void;
@@ -28,7 +9,7 @@ type RosterProps = {
 }
 
 const Roster = ({onAddPlayerButtonClick, players}: RosterProps) => {
-
+  
   return (
     <div className="roster">
       <button className="add-player-button default-button" onClick={onAddPlayerButtonClick}>Add Player</button>

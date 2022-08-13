@@ -103,3 +103,21 @@ input:focus {
 .modal-footer > * {
   margin-left: 15px;
 }
+
+.save-load-roster-section {
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.save-load-roster-section button {
+  margin: 5px;
+}
+
+.save-load-roster-section__name {
+  display: grid;
+  text-align: center;
+  grid-template-rows: 22px auto;
+}

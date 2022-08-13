@@ -103,7 +103,7 @@ const CharacterSelector = ({onChange}: CharacterSelectorProps) => {
           )}
         </div>
 
-        <SpecSelector classId={c.classId} onUpdateSpecSelections={onUpdateSpecSelections}/>
+        {/* <SpecSelector classId={c.classId} onUpdateSpecSelections={onUpdateSpecSelections}/> */}
       </div>
      )}
    </div></>
