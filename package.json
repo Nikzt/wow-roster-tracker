@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@types/node": "^18.6.5",
+    "@types/toastr": "^2.1.39",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "requirejs": "^2.3.6"
+    "requirejs": "^2.3.6",
+    "toastr": "^2.1.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",

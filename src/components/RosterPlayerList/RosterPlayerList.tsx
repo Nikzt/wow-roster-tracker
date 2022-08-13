@@ -1,23 +1,22 @@
-import { getRoster } from "../../common/api";
-import { Player, WoWClassEnum, WoWSpecEnum } from "../../common/classes";
+import { Roster } from "../../common/classes";
 import PlayerListItem from "../PlayerListItem/PlayerListItem";
-import "./roster.css";
+import "./rosterPlayerList.css";
 
 type RosterProps = {
   onAddPlayerButtonClick: () => void;
-  players: Player[];
+  roster: Roster;
 }
 
-const Roster = ({onAddPlayerButtonClick, players}: RosterProps) => {
+const RosterPlayerList = ({onAddPlayerButtonClick, roster}: RosterProps) => {
   
   return (
     <div className="roster">
       <button className="add-player-button default-button" onClick={onAddPlayerButtonClick}>Add Player</button>
       <div className="roster__player-list">
-        {players.map(p => <PlayerListItem player={p} key={p.id} />)}
+        {roster.players.map(p => <PlayerListItem player={p} key={p.id} />)}
       </div>
     </div>
   );
 };
 
-export default Roster;
+export default RosterPlayerList;

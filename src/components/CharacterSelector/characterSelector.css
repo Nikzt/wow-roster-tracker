@@ -39,14 +39,11 @@
   background-color: rgb(29, 33, 58);
   gap: 5px;
   z-index: 40;
-  height: 0px;
   opacity: 0;
   width: 0px;
-  transition: height 0.15s ease;
 }
 .character-selector__class-options.show {
   opacity: 1;
-  height: 225px;
   width: auto;
 }
 

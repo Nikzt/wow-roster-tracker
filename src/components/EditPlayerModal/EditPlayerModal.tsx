@@ -23,7 +23,6 @@ const EditPlayerModal = ({showModal, isEditing, onCancelClick, onUpdatePlayerCli
 
   const onSaveClick = () => {
     // Update player info
-    console.log(player);
     onUpdatePlayerClick(player);
   }
 
@@ -31,7 +30,8 @@ const EditPlayerModal = ({showModal, isEditing, onCancelClick, onUpdatePlayerCli
     const nextPlayer = {...player};
     // @ts-ignore
     nextPlayer.info[inputName] = e.target.value;
-    console.log(nextPlayer);
+    if (inputName === "name")
+      nextPlayer.id = e.target.value;
     setPlayer(nextPlayer);
   }
 
@@ -50,10 +50,10 @@ const EditPlayerModal = ({showModal, isEditing, onCancelClick, onUpdatePlayerCli
         <div className="edit-player-modal__player-info">
           <label>Name</label>
           <input onChange={(e) => updatePlayerInfo(e, "name")} type="text" name="name" spellCheck="false"/>
-          <label>Discord</label>
-          <input onChange={(e) => updatePlayerInfo(e, "discord")} type="text" name="discord" spellCheck="false"/>
-          <label>Battle.net</label>
-          <input onChange={(e) => updatePlayerInfo(e, "battleNet")} type="text" name="battleNet" spellCheck="false"/>
+          {/* <label>Discord</label> */}
+          {/* <input onChange={(e) => updatePlayerInfo(e, "discord")} type="text" name="discord" spellCheck="false"/> */}
+          {/* <label>Battle.net</label> */}
+          {/* <input onChange={(e) => updatePlayerInfo(e, "battleNet")} type="text" name="battleNet" spellCheck="false"/> */}
         </div>
         <CharacterSelector onChange={onUpdateCharacterSelections}/>
         <footer className="modal-footer">

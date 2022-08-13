@@ -97,6 +97,15 @@ export type PlayerInfo = {
   battleNet?: string;
 }
 
+export type Roster = {
+  id: string;
+  players: Player[];
+}
+
+export type RosterDb = {
+  [key: string]: Roster
+}
+
 export const getWoWClassDetails = (classEnum: WoWClassEnum) => {
   if (!WoWClassOptions[classEnum]) return null;
   return WoWClassOptions[classEnum];

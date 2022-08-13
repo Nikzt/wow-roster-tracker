@@ -1,69 +1,128 @@
 import { ChangeEvent, ChangeEventHandler, useState } from "react";
 import "./App.css";
-import { getRoster } from "./common/api";
-import { Player } from "./common/classes";
+import { getRoster, postRoster } from "./common/api";
+import { Player, Roster } from "./common/classes";
 import EditPlayerModal from "./components/EditPlayerModal/EditPlayerModal";
-import Roster from "./components/Roster/Roster";
+import RosterPlayerList from "./components/RosterPlayerList/RosterPlayerList";
+import toastr from "toastr";
 
 type EditPlayerModalState = {
   showModal: boolean;
   isEditing: boolean;
-}
+};
 
 function App() {
   const [modalState, setModalState] = useState<EditPlayerModalState>({
     showModal: false,
     isEditing: false,
-  })
+  });
 
-  const [rosterState, setRosterState] = useState<Player[]>([]);
-  const [rosterName, setRosterName] = useState('');
+  const [roster, setRoster] = useState<Roster>({
+    id: "",
+    players: [],
+  });
+
   const [loadedRoster, setLoadedRoster] = useState(false);
+  const [creatingNewRoster, setCreatingNewRoster] = useState(false);
 
   const onAddPlayerButtonClick = () => {
-    setModalState({...modalState, showModal: true})
-  }
+    setModalState({ ...modalState, showModal: true });
+  };
 
   const onCancelEditClick = () => {
-    setModalState({...modalState, showModal: false})
-  }
+    setModalState({ ...modalState, showModal: false });
+  };
 
   const onConfirmUpdateClick = (player: Player) => {
-    setModalState({...modalState, showModal: false})
-    setRosterState([...rosterState, player]);
-  }
+    setModalState({ ...modalState, showModal: false });
+    const nextRoster = { ...roster };
+    const playerIdx = nextRoster.players.findIndex((p) => p.id === player.id);
+    if (playerIdx < 0) nextRoster.players.push(player);
+    else nextRoster.players[playerIdx] = player;
+    setRoster(nextRoster);
+  };
 
   const onChangeRosterName = (e: ChangeEvent<HTMLInputElement>) => {
-    setRosterName(e.target.value);
-  }
+    setRoster({ ...roster, id: e.target.value });
+  };
 
-  const onLoadRosterClick = () => {
-    getRoster(rosterName);
+  const onLoadRosterClick = async () => {
+    if (roster.id.trim().length < 1) {
+      toastr.error(`Please enter a roster name to load.`);
+      return;
+    }
+
+    const nextRoster = await getRoster(roster.id);
+    if (!nextRoster) {
+      toastr.error(`Roster with name '${roster.id}' not found.`);
+      return;
+    }
+    setRoster(nextRoster as Roster);
     setLoadedRoster(true);
-  }
+  };
 
-  const getHeaderTitle = () => loadedRoster ? rosterName : "WoW Roster Tracker";
-  const getSaveButtonName = () => loadedRoster ? "Save" : "Create New";
+  const onSaveRosterClick = async () => {
+    const result = await postRoster(roster);
+    if (result)
+      toastr.success(`Successfully saved roster '${roster.id}'`)
+  };
+
+  const onCreateNewRosterClick = () => {
+    setRoster({
+      id: roster.id,
+      players: [],
+    });
+    setLoadedRoster(true);
+  };
+
+  const getHeaderTitle = () =>
+    loadedRoster ? roster.id : "WoW Roster Tracker";
+  const getSaveButtonName = () => (loadedRoster ? "Save" : "Create New");
 
   return (
     <>
       <header className="app-header">
         <h1 className="app-header__title">{getHeaderTitle()}</h1>
+        {loadedRoster && (
+          <button
+            onClick={onSaveRosterClick}
+          >
+            {getSaveButtonName()}
+          </button>
+        )}
       </header>
       <main>
-        <section className="save-load-roster-section">
-          <div className="save-load-roster-section__name">
-            <label>Roster Name</label>
-            <input type="text" onChange={onChangeRosterName}/>
-          </div>
-          <div>
-            <button onClick={onLoadRosterClick}>Load</button> 
-            <button>{getSaveButtonName()}</button>
-          </div>
-        </section>
-        {loadedRoster && <Roster onAddPlayerButtonClick={onAddPlayerButtonClick} players={rosterState}/>}
+        {!loadedRoster && (
+          <section className="save-load-roster-section">
+            <div className="save-load-roster-section__name">
+              <label>Roster Name</label>
+              <input type="text" onChange={onChangeRosterName} />
+            </div>
+            <div>
+              <button onClick={onLoadRosterClick}>Load</button>
+              <button
+                onClick={
+                  loadedRoster ? onSaveRosterClick : onCreateNewRosterClick
+                }
+              >
+                {getSaveButtonName()}
+              </button>
+            </div>
+          </section>
+        )}
+        {loadedRoster && (
+          <RosterPlayerList
+            onAddPlayerButtonClick={onAddPlayerButtonClick}
+            roster={roster}
+          />
+        )}
       </main>
-      <EditPlayerModal showModal={modalState.showModal} onUpdatePlayerClick={onConfirmUpdateClick} onCancelClick={onCancelEditClick} isEditing={modalState.isEditing}/>
+      <EditPlayerModal
+        showModal={modalState.showModal}
+        onUpdatePlayerClick={onConfirmUpdateClick}
+        onCancelClick={onCancelEditClick}
+        isEditing={modalState.isEditing}
+      />
     </>
   );
 }
