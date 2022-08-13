@@ -2,12 +2,13 @@ import { Roster } from "./classes";
 
 //const baseUrl = "http://localhost:4141";
 const baseUrl = window.location.href;
-const getRosterEndpoint = '/roster/:id';
-const putRosterEndpoint = '/roster'
+const getRosterEndpoint = 'roster/:id';
+const putRosterEndpoint = 'roster'
 
 export const getRoster = async (rosterId: string): Promise<Roster | boolean> => {
     const endpoint = getRosterEndpoint.replace(":id", rosterId)
     const apiPath = baseUrl + endpoint;
+    console.log(apiPath)
     try {
         const response = await fetch(apiPath);
         if (!response.ok)
