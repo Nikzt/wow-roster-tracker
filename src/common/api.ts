@@ -1,18 +1,23 @@
 import { Roster } from "./classes";
 
 //const baseUrl = "http://localhost:4141";
-const baseUrl = "http://3.21.241.24";
+const baseUrl = window.location.href;
 const getRosterEndpoint = '/roster/:id';
 const putRosterEndpoint = '/roster'
 
 export const getRoster = async (rosterId: string): Promise<Roster | boolean> => {
     const endpoint = getRosterEndpoint.replace(":id", rosterId)
     const apiPath = baseUrl + endpoint;
-    const response = await fetch(apiPath);
-    if (!response.ok)
+    try {
+        const response = await fetch(apiPath);
+        if (!response.ok)
+            return false;
+        const rosterData = await response.json();
+        return rosterData as Roster;
+    } catch (e) {
+        console.log(e);
         return false;
-    const rosterData = await response.json();
-    return rosterData as Roster;
+    }
 }
 
 export const postRoster = async (roster: Roster): Promise<boolean> => {
