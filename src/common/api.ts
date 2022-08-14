@@ -1,9 +1,9 @@
 import { Roster } from "./classes";
 
 //const baseUrl = "http://localhost:4141";
-const baseUrl = window.location.href;
+const baseUrl = "https://gwc29trnj4.execute-api.us-east-2.amazonaws.com/WoWRosterService/";
 const getRosterEndpoint = 'roster/:id';
-const putRosterEndpoint = 'roster'
+const putRosterEndpoint = 'roster';
 
 export const getRoster = async (rosterId: string): Promise<Roster | boolean> => {
     const endpoint = getRosterEndpoint.replace(":id", rosterId)

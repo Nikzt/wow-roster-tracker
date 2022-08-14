@@ -1,4 +1,0 @@
-# A basic redirect rule
-[[redirects]]
-  from = "/*"
-  to = "http://3.21.241.24/:splat"
